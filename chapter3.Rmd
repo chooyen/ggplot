@@ -1,0 +1,39 @@
+---
+title: "Chapter3-Toolbox"
+output: 
+  html_document:
+    theme: cerulean
+    highlight: textmate
+    fontsize: 8pt
+    toc: true
+    number_sections: true
+    code_download: true
+    toc_float:
+      collapsed: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+pacman::p_load("tidyverse","grid","gridExtra")
+```
+
+```{r}
+df <- data.frame(
+  x=c(3,1,5),
+  y=c(2,4,6),
+  label=c("a","b","c"))
+
+p <- ggplot(df,aes(x,y,label=label))+
+  labs(x=NULL,y=NULL)+
+  theme(plot.title = element_text(size=12))
+
+p1 <- p +geom_point()+ggtitle("point")
+P2 <- p + geom_area() + ggtitle("area")
+p3 <- p + geom_path() + ggtitle("path")
+p4 <- p + geom_polygon() + ggtitle("polygon")
+
+grid.arrange(p1,P2,p3,p4,ncol=2)
+
+```
+
